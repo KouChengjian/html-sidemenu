@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel slider example</title>
+  <link rel="stylesheet" type="text/css" href="css/mycss.css">
+</head>
+
+<body>
+  <!-- Centered page -->
+  <div id="page">
+    <h1>Panel slider example</h1>
+    <a id="left-panel-link" href="#left-panel">Open left panel</a> |
+    <a id="right-panel-link" href="#right-panel">Open right panel</a>
+    <hr />
+    <p>Usage instructions and source code <a href="https://github.com/eduardomb/jquery-panelslider">here</a></p>
+  </div>
+
+  <!-- Left panel -->
+  <div id="left-panel" class="panel">
+    <h2>Left panel</h2>
+    <p>Click anywhere outside panel to close it.</p>
+  </div>
+
+  <!-- Right panel -->
+  <div id="right-panel" class="panel">
+    <h2>Right panel</h2>
+    <p>Clicking outside this panel wont close it because <code>clickClose = false</code></p>
+    <button id="close-panel-bt">Close</button>
+  </div>
+
+  <!-- Load jQuery from Google CDN -->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+  <script src="js/jquery-3.1.1.js"></script>
+
+  <!-- Load Panelslider -->
+  <script src="js/jquery.panelslider.min.js"></script>
+
+  <script>
+    $('#left-panel-link').panelslider();
+
+    $('#right-panel-link').panelslider({
+      bodyClass: 'ps-active-right',
+      clickClose: false,
+      onOpen: function() {
+        console.log('right panel open');
+      }
+    });
+
+    $('#close-panel-bt').click(function() {
+      $.panelslider.close();
+    });
+
+    $('#left-panel, #right-panel').on('psBeforeOpen psOpen psBeforeClose psClose', function(e) {
+      console.log(e.type, e.target.getAttribute('id'));
+    });
+  </script>
+</body>
+</html>
